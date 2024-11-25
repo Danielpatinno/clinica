@@ -1,7 +1,6 @@
 <template>
     <div class="home">
       <div class="cadastro-paciente">
-        <!-- Botão de fechar dentro do modal -->
         <button class="close-btn" @click="closeModal">×</button>
         <h1>Cadastro de Paciente</h1>
         <form @submit.prevent="cadastrarPaciente">
@@ -39,6 +38,11 @@
   import { ref } from "vue";
   import { useAddPaciente } from "../../composobles/useAddPaciente";
 
+  function formatDate(date) {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+  }
+
   const paciente = ref({
     nome: "",
     data_nascimento: "",
@@ -52,6 +56,8 @@
   const { mutate } = useAddPaciente();
   
   const cadastrarPaciente = async () => {
+    paciente.value.data_nascimento = formatDate(paciente.value.data_nascimento);
+
     emit('novoPaciente', { ...paciente.value})
     emit('close')
     try {

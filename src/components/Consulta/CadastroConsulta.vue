@@ -15,9 +15,14 @@
         <div class="input-group">
             <label for="agenda">Agenda</label>
             <select id="agenda" v-model="consulta.agendaId" required>
-            <option v-for="agenda in agendas" :key="agenda.id" :value="agenda.id">
-                {{ getMedicoNomeById(agenda.medico_id) }} -
-                {{ agenda.dia_semana }} ás {{ agenda.horario_inicio }} 
+            <option 
+              v-for="agenda in agendas" 
+              :key="agenda.id" 
+              :value="agenda.id"
+              v-show="!agenda.ocupado"
+            >
+                {{ getMedicoNomeById(agenda.medicoId) }} -
+                {{ agenda.diaSemana }} ás {{ formatTime(agenda.horarioInicio) }} 
             </option>
             </select>
         </div>
@@ -35,11 +40,13 @@
   import { useGetPaciente } from '../../composobles/useGetPaciente';
   import { ref } from 'vue';
   import { useAddConsultas } from '../../composobles/useAddConsulta';
+  import { useFormatTime } from '../../composobles/useFormatTime';
 
   const { data:agendas } = useGetAgenda()
   const { data:pacientes } = useGetPaciente()
   const { data:medicos } = useGetMedic()
   const { mutate } = useAddConsultas(); 
+  const { formatTime } = useFormatTime();
 
   const emit = defineEmits(['close', 'novaConsulta']);
 

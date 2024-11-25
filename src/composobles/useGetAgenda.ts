@@ -3,9 +3,10 @@ import { api } from "../services/api";
 
 export interface ResponseAgendaProps {
   id: string;
-  medico_id: string;
-  dia_semana: string;
-  horario_inicio: string;
+  medicoId: string;
+  diaSemana: string;
+  horarioInicio: string;
+  ocupado: boolean;
 }
 
 async function getAgenda(): Promise<ResponseAgendaProps[]> {

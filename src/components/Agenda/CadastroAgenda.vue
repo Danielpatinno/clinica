@@ -19,17 +19,23 @@
           </option>
         </select>
       </div>
+
       <div class="form-group">
         <label for="diaSemana">Dia da Semana</label>
-        <input
+        <select
           id="diaSemana"
           v-model="agenda.diaSemana"
-          type="text"
-          placeholder="Ex: Segunda-feira"
           required
           class="input"
-        />
+        >
+          <option value="Segunda-feira">Segunda-feira</option>
+          <option value="Terça-feira">Terça-feira</option>
+          <option value="Quarta-feira">Quarta-feira</option>
+          <option value="Quinta-feira">Quinta-feira</option>
+          <option value="Sexta-feira">Sexta-feira</option>
+        </select>
       </div>
+
       <div class="form-group">
         <label for="hora">Horário</label>
         <input
@@ -49,7 +55,6 @@
     </form>
     </div>
   </div>
-    
 </template>
 
 <script setup>
@@ -68,10 +73,12 @@
     });
 
   const cadastrarAgenda = async () => {
+    console.log(agenda.value)
+
     const agendaPayload = {
-      medico_id: parseInt(agenda.value.medicoId, 10),
-      dia_semana: agenda.value.diaSemana,
-      horario_inicio: agenda.value.hora
+      medicoId: parseInt(agenda.value.medicoId, 10),
+      diaSemana: agenda.value.diaSemana,
+      horarioInicio: agenda.value.hora
     };
 
     emit('novaAgenda', {...agendaPayload.value})

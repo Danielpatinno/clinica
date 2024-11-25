@@ -3,9 +3,9 @@ import { api } from "../services/api";
 import { ResponseAgendaProps } from "./useGetAgenda";
 
 interface CreateAgendaProps {
-  medico_id: string;
-  dia_semana: string;
-  hora_inicio: string;
+  medicoId: string;
+  diaSemana: string;
+  horarioInicio: string;
 }
 
 async function createAgenda(agenda:CreateAgendaProps):Promise<ResponseAgendaProps> {
